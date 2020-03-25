@@ -27,4 +27,19 @@ describe('Thermostat', function() {
     }
     expect(thermostat.getCurrentTemperature()).toEqual(10);
   });
+
+  it('PSM is on by default', function() {
+    expect(thermostat.isPowerSavingModeOn()).toEqual(true);
+  });
+
+  it('PSM can be turned off', function() {
+    thermostat.switchPsmOff();
+    expect(thermostat.isPowerSavingModeOn()).toEqual(false);
+  });
+
+  it('PSM can be turned on', function() {
+    thermostat.switchPsmOff();
+    thermostat.switchPsmOn();
+    expect(thermostat.isPowerSavingModeOn()).toEqual(true);
+  });
 });
