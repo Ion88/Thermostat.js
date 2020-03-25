@@ -42,4 +42,25 @@ describe('Thermostat', function() {
     thermostat.switchPsmOn();
     expect(thermostat.isPowerSavingModeOn()).toEqual(true);
   });
+
+  it('limit temperature to 25 degrees when PSM is activated', function() {
+    for (var i = 0; i < 7; i++) {
+      thermostat.turnUp();
+    }
+    expect(thermostat.getCurrentTemperature()).toEqual(25);
+  });
+
+  it('limit temperature to 32 degrees when PSM is off', function() {
+    thermostat.switchPsmOff();
+    for (var i = 0; i < 13; i++) {
+      thermostat.turnUp();
+    }
+    expect(thermostat.getCurrentTemperature()).toEqual(32);
+  });
+
+  it('reset thermostat at default temperature', function() {
+    thermostat.turnUp();
+    thermostat.reset();
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
+  });
 });
